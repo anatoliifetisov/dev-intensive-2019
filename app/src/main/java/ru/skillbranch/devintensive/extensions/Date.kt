@@ -4,12 +4,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
 import ru.skillbranch.devintensive.extensions.TimeUnits.*
-import java.lang.IllegalArgumentException
 
-fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy") = SimpleDateFormat(pattern, Locale("ru")).format(this)
+fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
+    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
+    return dateFormat.format(this)
+}
 
 fun Date.add(value: Int, units: TimeUnits = SECOND): Date {
-    this.time = this.time + units.value * value
+    this.time += units.value * value
     return this
 }
 
@@ -37,11 +39,13 @@ fun getTenseForm(interval: String, isPast: Boolean): String {
 }
 
 fun getPluralForm(amount: Int, units: TimeUnits): String {
-    return when(abs(amount) % 100){
+    val posAmount = abs(amount) % 100
+
+    return when(posAmount){
         1 -> Plurals.ONE.get(units)
         in 2..4 -> Plurals.FEW.get(units)
         0, in 5..19 -> Plurals.MANY.get(units)
-        else -> throw IllegalArgumentException()
+        else -> getPluralForm(posAmount % 10, units)
     }
 }
 
