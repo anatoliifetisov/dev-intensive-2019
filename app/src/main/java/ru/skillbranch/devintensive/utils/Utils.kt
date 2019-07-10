@@ -24,7 +24,7 @@ object Utils {
             var c = transliterationMap[it.toLowerCase()] ?: it.toString()
             if (it.isUpperCase() && c.isNotBlank())
                 c = c.capitalize()
-            return c
+            builder.append(c)
         }
 
         return builder.toString().replace(" ", divider)
