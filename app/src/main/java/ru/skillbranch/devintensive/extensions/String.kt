@@ -8,4 +8,4 @@ fun String.truncate(length: Int = 16): String{
         trimmed.substring(0, length).trim() + "..."
 }
 
-fun String.stripHtml() = this.replace(Regex("(<.*?>)|(&[^ а-я]{1,4}?;)"), "").replace(Regex("\\s"), " ")
+fun String.stripHtml() = this.replace(Regex("(<.*?>)|(&[^ а-я]{1,4}?;)"), "").replace(Regex("\\s+"), " ")
