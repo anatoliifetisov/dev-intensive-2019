@@ -11,7 +11,7 @@ object Utils {
         'ь' to "", 'э' to "e", 'ю' to "yu", 'я' to "ya")
 
     fun parseFullName(fullName: String?): Pair<String?, String?>{
-        val parts = fullName?.trim()?.split("\\s")
+        val parts = fullName?.trim()?.split(" ")
         val firstName = parts?.getOrNull(0)?.ifBlank { null }
         val lastName = parts?.getOrNull(1)?.ifBlank { null }
         return firstName to lastName
